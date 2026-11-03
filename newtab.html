@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
+    <title>Nuova scheda</title>
+    <link rel="stylesheet" href="css/newtab.css">
+  </head>
+  <body>
+    <main class="app-shell">
+      <span id="site-count" class="sr-only">0 destinazioni salvate</span>
+      <div id="status-region" class="status-region" role="status" aria-live="polite"></div>
+      <section id="sites-region" aria-labelledby="sites-heading">
+        <h2 id="sites-heading" class="sr-only">Siti salvati</h2>
+        <div id="sites-grid" class="sites-grid"></div>
+        <div id="empty-state" class="empty-state" hidden>
+          <div class="empty-glyph" aria-hidden="true">◎</div>
+          <h2>Nessun sito configurato.</h2>
+          <p>Aggiungi il primo sito alla tua pagina Nuova scheda.</p>
+          <button id="empty-add-button" class="button button-secondary" type="button">Aggiungi il primo sito</button>
+        </div>
+      </section>
+    </main>
+    <button id="add-site-button" class="customize-button" type="button" aria-label="Aggiungi sito" title="Aggiungi sito">+</button>
+
+    <dialog id="site-dialog" class="site-dialog" aria-labelledby="dialog-title">
+      <form id="site-form" method="dialog" novalidate>
+        <div class="dialog-heading">
+          <div>
+            <p class="section-kicker">Configurazione</p>
+            <h2 id="dialog-title">Aggiungi sito</h2>
+          </div>
+          <button id="dialog-close" class="icon-button" type="button" aria-label="Chiudi dialogo">×</button>
+        </div>
+        <input id="site-id" type="hidden">
+        <div class="form-fields">
+          <div class="field">
+            <label for="site-title">Nome</label>
+            <input id="site-title" name="title" type="text" maxlength="80" autocomplete="off" required aria-describedby="title-error">
+            <p id="title-error" class="field-error" role="alert"></p>
+          </div>
+          <div class="field">
+            <label for="site-url">URL</label>
+            <input id="site-url" name="url" type="text" inputmode="url" placeholder="es. github.com" autocomplete="url" required aria-describedby="url-error">
+            <p id="url-error" class="field-error" role="alert"></p>
+          </div>
+          <fieldset class="icon-choice">
+            <legend>Icona</legend>
+            <label class="radio-row"><input id="icon-auto" type="radio" name="icon-mode" value="auto" checked> <span>Automatica dal sito</span></label>
+            <label class="radio-row"><input id="icon-custom" type="radio" name="icon-mode" value="custom"> <span>Personalizzata</span></label>
+          </fieldset>
+          <div id="custom-icon-field" class="field custom-icon-field" hidden>
+            <label for="custom-icon">Seleziona immagine <span class="field-hint">PNG, JPEG o WebP · max 2 MB</span></label>
+            <input id="custom-icon" type="file" accept="image/png,image/jpeg,image/webp" aria-describedby="image-error">
+            <p id="image-error" class="field-error" role="alert"></p>
+            <div id="icon-preview" class="icon-preview" hidden>
+              <span>Anteprima</span>
+              <img id="preview-image" src="assets/icons/extension-48.png" alt="Anteprima icona personalizzata">
+            </div>
+          </div>
+        </div>
+        <p id="form-error" class="form-error" role="alert"></p>
+        <div class="dialog-actions">
+          <button id="dialog-cancel" class="button button-quiet" type="button">Annulla</button>
+          <button id="dialog-save" class="button button-primary" type="submit">Salva sito</button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog id="confirm-dialog" class="confirm-dialog" aria-labelledby="confirm-title">
+      <form id="confirm-form" method="dialog">
+        <p class="section-kicker">Azione irreversibile</p>
+        <h2 id="confirm-title">Rimuovere questo sito?</h2>
+        <p id="confirm-copy" class="confirm-copy"></p>
+        <div class="dialog-actions">
+          <button id="confirm-cancel" class="button button-quiet" type="button">Annulla</button>
+          <button id="confirm-remove" class="button button-danger" type="submit">Rimuovi</button>
+        </div>
+      </form>
+    </dialog>
+    <script type="module" src="js/app.js"></script>
+  </body>
+</html>
